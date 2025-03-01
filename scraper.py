@@ -23,21 +23,24 @@ if response.status_code == 200:
         #print(f"Item: {item}\n")
         title = None
         price = None
-
+        link = None
         try:
             title = item.find("h5", class_="text-truncate-2 narrow").text.strip()  # Update class
             price = item.find("span", class_="currency-amount").text.strip()  # Update class
+            link = item.find("img", alt=title)["src"]  # Update class
+            print(f"Title: {title}\nPrice: {price}\nLink: {link}\n")
         except:
-            price = "Price not found"
-        print(title, price)
+            price = "Attributes not found"
+        print(title, price, link)
         data.append({
             "id": len(data) + 1,
             "title": title,
             "price": price,
-            "path": "https://32auctions.com" + item["href"]  # Update with actual attribute
+            "path": link
+            #"path": "https://32auctions.com" + item["href"]  # Update with actual attribute
         })
 else:
     print("Failed to fetch page:", response.status_code)
 
-with open('gallery.json', 'w') as json_file:
+with open('api/gallery.json', 'w') as json_file:
     json.dump(data, json_file, indent=2)

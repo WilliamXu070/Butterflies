@@ -1,74 +1,254 @@
 [
-    {
-        "id": 1,
-        "title": "Vintage Patek Philippe",
-        "price": "Current Bid: $24,500",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 2,
-        "title": "Abstract by J. Rivers",
-        "price": "Current Bid: $12,800",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 3,
-        "title": "Cartier Diamond Suite",
-        "price": "Current Bid: $38,200",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 4,
-        "title": "First Edition Hemingway",
-        "price": "Current Bid: $9,650",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 5,
-        "title": "Bronze Sculpture, 1920",
-        "price": "Current Bid: $15,300",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 6,
-        "title": "Antique Diamond Ring",
-        "price": "Current Bid: $18,750",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 7,
-        "title": "Vintage Chanel Bag",
-        "price": "Current Bid: $6,200",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 8,
-        "title": "Ming Dynasty Vase",
-        "price": "Current Bid: $52,000",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 9,
-        "title": "Rare Coin Collection",
-        "price": "Current Bid: $32,400",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 10,
-        "title": "Art Deco Chandelier",
-        "price": "Current Bid: $14,800",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 11,
-        "title": "Tiffany Stained Glass",
-        "price": "Current Bid: $28,500",
-        "path": "/api/placeholder/800/1000"
-    },
-    {
-        "id": 12,
-        "title": "Signed First Edition",
-        "price": "Current Bid: $7,200",
-        "path": "/api/placeholder/800/1000"
-    }
+  {
+    "id": 1,
+    "title": "3 Blind Mice",
+    "price": "10.00",
+    "path": "https://assets.32auctions.com/pics/10731580/John_Richer7_s300.jpg?v=20250126233446"
+  },
+  {
+    "id": 2,
+    "title": "After The Storm",
+    "price": "100.00",
+    "path": "https://assets.32auctions.com/pics/10725810/HELEN_s300.jpeg?v=20250124183759"
+  },
+  {
+    "id": 3,
+    "title": "Alma st Dundas",
+    "price": "120.00",
+    "path": "https://assets.32auctions.com/pics/10744845/dundas_s300.jpg?v=20250130152024"
+  },
+  {
+    "id": 4,
+    "title": "Antigua",
+    "price": "60.00",
+    "path": "https://assets.32auctions.com/pics/10783628/ANTIGUA_s300.jpg?v=20250210220756"
+  },
+  {
+    "id": 5,
+    "title": "Appears to be both",
+    "price": "100.00",
+    "path": "https://assets.32auctions.com/pics/10731581/IMG_7102_s300.jpeg?v=20250126233447"
+  },
+  {
+    "id": 6,
+    "title": "Beauty out of Chaos",
+    "price": "50.00",
+    "path": "https://assets.32auctions.com/pics/10731582/IMG_7114_s300.jpeg?v=20250126233448"
+  },
+  {
+    "id": 7,
+    "title": "Blessings",
+    "price": "60.00",
+    "path": "https://assets.32auctions.com/pics/10744854/blessings_s300.jpg?v=20250130152535"
+  },
+  {
+    "id": 8,
+    "title": "Closed Rose",
+    "price": "15.00",
+    "path": "https://assets.32auctions.com/pics/10731583/Closed_Rose_s300.jpg?v=20250126233450"
+  },
+  {
+    "id": 9,
+    "title": "Coddiewomple",
+    "price": "50.00",
+    "path": "https://assets.32auctions.com/pics/10744918/coddiewomple_s300.jpg?v=20250130153854"
+  },
+  {
+    "id": 10,
+    "title": "Cracked",
+    "price": "75.00",
+    "path": "https://assets.32auctions.com/pics/10731584/cracked_s300.jpg?v=20250126233451"
+  },
+  {
+    "id": 11,
+    "title": "Cycles of Life The Bruce Trail",
+    "price": "100.00",
+    "path": "https://assets.32auctions.com/pics/10783672/cycle_life_s300.jpg?v=20250210221936"
+  },
+  {
+    "id": 12,
+    "title": "Ghost Line #2",
+    "price": "65.00",
+    "path": "https://assets.32auctions.com/pics/10744865/more_wood_s300.jpg?v=20250130152831"
+  },
+  {
+    "id": 13,
+    "title": "Ghost Line #3",
+    "price": "65.00",
+    "path": "https://assets.32auctions.com/pics/10744878/more_more_wood_s300.jpg?v=20250130153107"
+  },
+  {
+    "id": 14,
+    "title": "Growing Wild",
+    "price": "60.00",
+    "path": "https://assets.32auctions.com/pics/10731585/April_s300.jpg?v=20250126233452"
+  },
+  {
+    "id": 15,
+    "title": "I Can't Breathe",
+    "price": "50.00",
+    "path": "https://assets.32auctions.com/pics/10731543/cant_breathe_s300.jpg?v=20250126232228"
+  },
+  {
+    "id": 16,
+    "title": "Jazzy Owl Ring",
+    "price": "30.00",
+    "path": "https://assets.32auctions.com/pics/10835346/Screenshot_22-2-2025_132012_www.instagram.com_s300.jpeg?v=20250222182327"
+  },
+  {
+    "id": 17,
+    "title": "Latched",
+    "price": "15.00",
+    "path": "https://assets.32auctions.com/pics/10744963/latched_s300.jpg?v=20250130154612"
+  },
+  {
+    "id": 18,
+    "title": "Living With the Land",
+    "price": "80.00",
+    "path": "https://assets.32auctions.com/pics/10738367/land_s300.jpg?v=20250128203009"
+  },
+  {
+    "id": 19,
+    "title": "Maroon Lake",
+    "price": "225.00",
+    "path": "https://assets.32auctions.com/pics/10731545/Maroon_Lake_s550_s300.jpg?v=20250126232425"
+  },
+  {
+    "id": 20,
+    "title": "Miami",
+    "price": "15.00",
+    "path": "https://assets.32auctions.com/pics/10731586/Miami_s300.jpg?v=20250126233454"
+  },
+  {
+    "id": 21,
+    "title": "Mlis\u00e9e Dorsay",
+    "price": "50.00",
+    "path": "https://assets.32auctions.com/pics/10731587/train_s300.jpg?v=20250126233456"
+  },
+  {
+    "id": 22,
+    "title": "Morning Calm",
+    "price": "65.00",
+    "path": "https://assets.32auctions.com/pics/10871851/Screenshot_1-3-2025_91730_www.instagram.com_s300.jpeg?v=20250301141836"
+  },
+  {
+    "id": 23,
+    "title": "Mystic Call",
+    "price": "60.00",
+    "path": "https://assets.32auctions.com/pics/10738401/wolf_s300.jpg?v=20250128203758"
+  },
+  {
+    "id": 24,
+    "title": "Open Rose",
+    "price": "15.00",
+    "path": "https://assets.32auctions.com/pics/10744824/rose_2_s300.jpg?v=20250130150951"
+  },
+  {
+    "id": 25,
+    "title": "Resplendent",
+    "price": "15.00",
+    "path": "https://assets.32auctions.com/pics/10731588/gold_s300.jpg?v=20250126233458"
+  },
+  {
+    "id": 26,
+    "title": "Restful Watch",
+    "price": "60.00",
+    "path": "https://assets.32auctions.com/pics/10738395/cub_s300.jpg?v=20250128203608"
+  },
+  {
+    "id": 27,
+    "title": "Rust and Chrome",
+    "price": "50.00",
+    "path": "https://assets.32auctions.com/pics/10731589/0020B711-7B6F-4625-9E65-47DC13ADC800_s300.jpeg?v=20250126233459"
+  },
+  {
+    "id": 28,
+    "title": "Sgraffito Black Glazed Mug",
+    "price": "50.00",
+    "path": "https://assets.32auctions.com/pics/10835349/Screenshot_22-2-2025_132029_www.instagram.com_s300.jpeg?v=20250222182448"
+  },
+  {
+    "id": 29,
+    "title": "Spring Has Sprung",
+    "price": "15.00",
+    "path": "https://assets.32auctions.com/pics/10744832/spring_s_s300.jpg?v=20250130151306"
+  },
+  {
+    "id": 30,
+    "title": "Spring Maple",
+    "price": "60.00",
+    "path": "https://assets.32auctions.com/pics/10871854/Screenshot_1-3-2025_91910_www.instagram.com_s300.jpeg?v=20250301142100"
+  },
+  {
+    "id": 31,
+    "title": "Spring Time",
+    "price": "40.00",
+    "path": "https://assets.32auctions.com/pics/10731538/Spring_time_s300.jpeg?v=20250126232021"
+  },
+  {
+    "id": 32,
+    "title": "Stainless Steel Ring",
+    "price": "30.00",
+    "path": "https://assets.32auctions.com/pics/10807197/Screenshot_16-2-2025_2086_www.instagram.com_s300.jpeg?v=20250217012803"
+  },
+  {
+    "id": 33,
+    "title": "Starlight Dreams",
+    "price": "50.00",
+    "path": "https://assets.32auctions.com/pics/10871865/Screenshot_1-3-2025_9250_www.instagram.com_s300.jpeg?v=20250301142612"
+  },
+  {
+    "id": 34,
+    "title": "Summer's Sunset",
+    "price": "60.00",
+    "path": "https://assets.32auctions.com/pics/10783643/jessica_s300.jpg?v=20250210221040"
+  },
+  {
+    "id": 35,
+    "title": "Sunrise Thanks Again",
+    "price": "60.00",
+    "path": "https://assets.32auctions.com/pics/10731590/IMG_7101_s300.jpeg?v=20250126233500"
+  },
+  {
+    "id": 36,
+    "title": "Swan Song",
+    "price": "50.00",
+    "path": "https://assets.32auctions.com/pics/10807200/Screenshot_16-2-2025_20828_www.instagram.com_s300.jpeg?v=20250217013005"
+  },
+  {
+    "id": 37,
+    "title": "The Sea is a Body in a Thousand Ways",
+    "price": "375.00",
+    "path": "https://assets.32auctions.com/pics/10731591/IMG_4349_s300.jpeg?v=20250126233503"
+  },
+  {
+    "id": 38,
+    "title": "Three Foxes",
+    "price": "50.00",
+    "path": "https://assets.32auctions.com/pics/10871861/Screenshot_1-3-2025_92136_www.instagram.com_s300.jpeg?v=20250301142416"
+  },
+  {
+    "id": 39,
+    "title": "Tiffany Falls",
+    "price": "40.00",
+    "path": "https://assets.32auctions.com/pics/10744928/waterfall_s300.jpg?v=20250130154121"
+  },
+  {
+    "id": 40,
+    "title": "Tiffany Falls #2",
+    "price": "40.00",
+    "path": "https://assets.32auctions.com/pics/10744945/more_waterfall_s300.jpg?v=20250130154353"
+  },
+  {
+    "id": 41,
+    "title": "Winters Embrace",
+    "price": "60.00",
+    "path": "https://assets.32auctions.com/pics/10738386/this_s300.jpg?v=20250128203356"
+  },
+  {
+    "id": 42,
+    "title": "Wooden Remains",
+    "price": "15.00",
+    "path": "https://assets.32auctions.com/pics/10744839/wood_s300.jpg?v=20250130151700"
+  }
 ]
