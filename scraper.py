@@ -1,6 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-
+import json
 # Replace with the actual auction URL
 url = "https://www.32auctions.com/organizations/117970/auctions/176290"
 
@@ -10,6 +10,8 @@ headers = {
 }
 
 response = requests.get(url, headers=headers)
+
+data = []
 
 if response.status_code == 200:
     print("Page fetched successfully")
@@ -28,5 +30,14 @@ if response.status_code == 200:
         except:
             price = "Price not found"
         print(title, price)
+        data.append({
+            "id": len(data) + 1,
+            "title": title,
+            "price": price,
+            "path": "https://32auctions.com" + item["href"]  # Update with actual attribute
+        })
 else:
     print("Failed to fetch page:", response.status_code)
+
+with open('gallery.json', 'w') as json_file:
+    json.dump(data, json_file, indent=2)
