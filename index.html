@@ -1,24 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Carousel</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance Auctions</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: white;
+            color: black;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: black;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+        
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #f5f5f5;
+            margin-top: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: black;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+        
+        .btn:hover {
+            opacity: 0.8;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 100px 0;
+        }
+        
+        .about h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .about-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .about-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+        
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-color: #ddd;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: black;
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .social-links li {
+            margin-right: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Gallery Page */
+        .gallery {
+            padding: 120px 0 80px;
+        }
+        
+        .gallery h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .gallery-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            margin-bottom: 40px;
+        }
+        
+        .gallery-item {
+            flex: 0 0 auto;
+            width: 300px;
+            height: 400px;
+            margin-right: 20px;
+            scroll-snap-align: start;
+            background-color: #f0f0f0;
+            position: relative;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+        }
+        
+        .gallery-info h3 {
+            margin-bottom: 5px;
+        }
+        
+        /* Charity Page */
+        .charity {
+            padding: 120px 0;
+        }
+        
+        .charity h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .charity-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        
+        .charity-text {
+            flex: 1;
+            min-width: 300px;
+            padding-right: 40px;
+        }
+        
+        .charity-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            background-color: #ddd;
+        }
+        
+        .impact-stats {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-top: 60px;
+        }
+        
+        .stat-box {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            margin: 20px;
+            padding: 30px;
+            background-color: #f5f5f5;
+        }
+        
+        .stat-box h3 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+            }
+            
+            .nav-links li {
+                margin: 0 15px;
+            }
+            
+            .about-text, .charity-text {
+                padding-right: 0;
+                margin-bottom: 30px;
+            }
+        }
+    </style>
 </head>
 <body>
-
-  <div id="carousel" class="carousel-container">
-    <button id="prev" class="nav-button">Previous</button>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">ELEGANCE AUCTIONS</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="charity.html">Charity</a></li>
+            </ul>
+        </div>
+    </nav>
     
-    <div class="image-container">
-      <img id="image1" class="carousel-image">
-      <img id="image2" class="carousel-image greyed-out">
+    <!-- Home Page Content -->
+    <section class="hero">
+        <div class="container">
+            <h1>Curated Luxury Auctions</h1>
+            <p>Discover exclusive items and bid on rare collectibles while supporting worthy causes.</p>
+            <a href="gallery.html" class="btn">View Auctions</a>
+        </div>
+    </section>
+    
+    <section class="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Elegance Auctions was founded in 2020 with a simple mission: to connect discerning collectors with exceptional items while making a positive impact in the world.</p>
+                    <p>Our team of experts curates each auction with meticulous attention to detail, ensuring authenticity and quality. We specialize in fine art, vintage jewelry, rare watches, and luxury memorabilia.</p>
+                    <p>What sets us apart is our commitment to philanthropy. A portion of every sale is donated to our partner charities, allowing our clients to acquire remarkable pieces while contributing to meaningful causes.</p>
+                    <p>Whether you're a seasoned collector or new to the world of auctions, we invite you to explore our carefully selected offerings and join our community of passionate connoisseurs.</p>
+                </div>
+                <div class="about-image">
+                    <!-- Placeholder for an image -->
+                    <img src="/api/placeholder/600/400" alt="About Elegance Auctions" style="width:100%; height:100%; object-fit:cover;">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Elegance Auctions</h3>
+                    <p>123 Luxury Lane</p>
+                    <p>New York, NY 10001</p>
+                    <p>info@eleganceauctions.com</p>
+                    <p>+1 (212) 555-7890</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Auction Schedule</h3>
+                    <p>Summer Collection: June 15-30</p>
+                    <p>Vintage Watches: August 1-15</p>
+                    <p>Fine Art Selection: September 10-25</p>
+                    <p>Holiday Luxury: December 1-20</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul class="social-links">
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Elegance Auctions. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Gallery Page (Linked from navigation) -->
+    <div id="gallery-page" style="display:none;">
+        <section class="gallery">
+            <div class="container">
+                <h2>Current Auctions Gallery</h2>
+                <div class="gallery-container">
+                    <!-- Gallery Item 1 -->
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/300/400" alt="Vintage Watch">
+                        <div class="gallery-info">
+                            <h3>Vintage Patek Philippe</h3>
+                            <p>Current Bid: $24,500</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery Item 2 -->
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/300/400" alt="Modern Art Painting">
+                        <div class="gallery-info">
+                            <h3>Abstract by J. Rivers</h3>
+                            <p>Current Bid: $12,800</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery Item 3 -->
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/300/400" alt="Diamond Necklace">
+                        <div class="gallery-info">
+                            <h3>Cartier Diamond Suite</h3>
+                            <p>Current Bid: $38,200</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery Item 4 -->
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/300/400" alt="Rare Book">
+                        <div class="gallery-info">
+                            <h3>First Edition Hemingway</h3>
+                            <p>Current Bid: $9,650</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery Item 5 -->
+                    <div class="gallery-item">
+                        <img src="/api/placeholder/300/400" alt="Sculpture">
+                        <div class="gallery-info">
+                            <h3>Bronze Sculpture, 1920</h3>
+                            <p>Current Bid: $15,300</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
-
-    <button id="next" class="nav-button">Next</button>
-  </div>
-
-  <script src="script.js"></script>
+    
+    <!-- Charity Page (Linked from navigation) -->
+    <div id="charity-page" style="display:none;">
+        <section class="charity">
+            <div class="container">
+                <h2>Our Charitable Mission</h2>
+                <div class="charity-content">
+                    <div class="charity-text">
+                        <p>At Elegance Auctions, we believe in the power of luxury with purpose. From our inception, we've been committed to making a meaningful difference in the world through our charitable initiatives.</p>
+                        <p>For every auction, we donate 15% of our proceeds to our partner charities. These organizations work tirelessly in areas such as education, healthcare, environmental conservation, and humanitarian aid.</p>
+                        <p>Our flagship partnership is with the Global Education Foundation, which provides educational opportunities to underprivileged children worldwide. Through this collaboration, we've helped build schools, supply educational materials, and fund scholarship programs.</p>
+                        <p>We also work with Ocean Conservation Alliance to protect marine ecosystems and reduce plastic pollution in our oceans. Our contributions have supported cleanup initiatives, research, and awareness campaigns.</p>
+                        <p>When you participate in our auctions, you're not just acquiring extraordinary items – you're contributing to a better world. We invite you to join us in this meaningful journey of philanthropy through luxury.</p>
+                    </div>
+                    <div class="charity-image">
+                        <!-- Placeholder for an image -->
+                        <img src="/api/placeholder/600/400" alt="Charity Work" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                </div>
+                
+                <div class="impact-stats">
+                    <div class="stat-box">
+                        <h3>$2.4M</h3>
+                        <p>Donated to Charity Since 2020</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>12</h3>
+                        <p>Partner Organizations Worldwide</p>
+                    </div>
+                    <div class="stat-box">
+                        <h3>4,500+</h3>
+                        <p>Children's Education Supported</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <script>
+        // Simple script to handle navigation between pages
+        const currentPath = window.location.pathname;
+        
+        if (currentPath.includes('gallery.html')) {
+            document.getElementById('gallery-page').style.display = 'block';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.about').style.display = 'none';
+        } else if (currentPath.includes('charity.html')) {
+            document.getElementById('charity-page').style.display = 'block';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.about').style.display = 'none';
+        }
+    </script>
 </body>
 </html>

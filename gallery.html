@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elegance Auctions | Gallery</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: white;
+            color: black;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: black;
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            transition: opacity 0.3s;
+        }
+        
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+        
+        /* Gallery Page */
+        .gallery {
+            padding: 120px 0 80px;
+        }
+        
+        .gallery h2 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        /* Thumbnail Grid */
+        .thumbnail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .thumbnail {
+            aspect-ratio: 3/4;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            transition: transform 0.3s;
+        }
+        
+        .thumbnail:hover {
+            transform: scale(1.03);
+        }
+        
+        .thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: opacity 0.3s;
+            opacity: 0;
+        }
+        
+        .thumbnail img.loaded {
+            opacity: 1;
+        }
+        
+        .thumbnail-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+        }
+        
+        .thumbnail-info h3 {
+            margin-bottom: 5px;
+            font-size: 16px;
+        }
+        
+        .thumbnail-info p {
+            font-size: 14px;
+        }
+        
+        /* Carousel Modal */
+        .carousel-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            touch-action: pan-y;
+        }
+        
+        .carousel-container {
+            position: relative;
+            width: 80%;
+            max-width: 1000px;
+            height: 80%;
+            display: flex;
+            overflow: hidden;
+        }
+        
+        .carousel-slides-wrapper {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.3s ease-out;
+            touch-action: pan-x;
+        }
+        
+        .carousel-slide {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .carousel-image {
+            max-width: 100%;
+            max-height: 80%;
+            object-fit: contain;
+        }
+        
+        .carousel-caption {
+            color: white;
+            margin-top: 20px;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .carousel-caption h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .carousel-caption p {
+            font-size: 18px;
+        }
+        
+        .carousel-control {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            font-size: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 2100;
+        }
+        
+        .carousel-control:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .carousel-prev {
+            left: 20px;
+        }
+        
+        .carousel-next {
+            right: 20px;
+        }
+        
+        .carousel-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: transparent;
+            color: white;
+            border: none;
+            font-size: 30px;
+            cursor: pointer;
+            z-index: 2100;
+        }
+        
+        /* Pagination Indicators */
+        .carousel-indicators {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+        
+        .indicator.active {
+            background-color: white;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: black;
+            color: white;
+            padding: 60px 0;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .footer-column {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-column p {
+            margin-bottom: 15px;
+        }
+        
+        .social-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .social-links li {
+            margin-right: 15px;
+        }
+        
+        .social-links a {
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+        
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Loader Animation */
+        .thumbnail::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #000;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+        
+        .thumbnail.loaded::before {
+            display: none;
+        }
+        
+        /* Swipe Instructions */
+        .swipe-instruction {
+            display: none;
+            position: absolute;
+            bottom: 60px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            animation: fadeOut 3s forwards;
+            animation-delay: 2s;
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+            }
+            
+            .nav-links {
+                margin-top: 20px;
+            }
+            
+            .nav-links li {
+                margin: 0 15px;
+            }
+            
+            .thumbnail-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+            
+            .carousel-container {
+                width: 95%;
+            }
+            
+            .carousel-control {
+                display: none;
+            }
+            
+            .swipe-instruction {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">ELEGANCE AUCTIONS</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="charity.html">Charity</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Gallery Page Content -->
+    <section class="gallery">
+        <div class="container">
+            <h2>Current Auctions Gallery</h2>
+            <div class="thumbnail-grid" id="gallery-grid">
+                <!-- Thumbnails will be generated by JavaScript -->
+            </div>
+        </div>
+    </section>
+    
+    <!-- Carousel Modal -->
+    <div class="carousel-modal" id="carousel-modal">
+        <button class="carousel-close" id="carousel-close">&times;</button>
+        <button class="carousel-control carousel-prev" id="carousel-prev">&lt;</button>
+        <div class="carousel-container" id="carousel-container">
+            <div class="carousel-slides-wrapper" id="carousel-slides-wrapper">
+                <!-- Carousel slides will be generated by JavaScript -->
+            </div>
+            <div class="swipe-instruction">Swipe left or right to navigate</div>
+        </div>
+        <button class="carousel-control carousel-next" id="carousel-next">&gt;</button>
+        <div class="carousel-indicators" id="carousel-indicators">
+            <!-- Indicators will be generated by JavaScript -->
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Elegance Auctions</h3>
+                    <p>123 Luxury Lane</p>
+                    <p>New York, NY 10001</p>
+                    <p>info@eleganceauctions.com</p>
+                    <p>+1 (212) 555-7890</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Auction Schedule</h3>
+                    <p>Summer Collection: June 15-30</p>
+                    <p>Vintage Watches: August 1-15</p>
+                    <p>Fine Art Selection: September 10-25</p>
+                    <p>Holiday Luxury: December 1-20</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Connect With Us</h3>
+                    <ul class="social-links">
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                        <li><a href="#">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Elegance Auctions. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Gallery items data
+            let galleryItems;
+            await fetch('api/gallery.json')
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    galleryItems = data;
+                });
+            /*const galleryItems = [
+                {
+                    id: 1,
+                    title: 'Vintage Patek Philippe',
+                    price: 'Current Bid: $24,500',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 2,
+                    title: 'Abstract by J. Rivers',
+                    price: 'Current Bid: $12,800',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 3,
+                    title: 'Cartier Diamond Suite',
+                    price: 'Current Bid: $38,200',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 4,
+                    title: 'First Edition Hemingway',
+                    price: 'Current Bid: $9,650',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 5,
+                    title: 'Bronze Sculpture, 1920',
+                    price: 'Current Bid: $15,300',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 6,
+                    title: 'Antique Diamond Ring',
+                    price: 'Current Bid: $18,750',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 7,
+                    title: 'Vintage Chanel Bag',
+                    price: 'Current Bid: $6,200',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 8,
+                    title: 'Ming Dynasty Vase',
+                    price: 'Current Bid: $52,000',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 9,
+                    title: 'Rare Coin Collection',
+                    price: 'Current Bid: $32,400',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 10,
+                    title: 'Art Deco Chandelier',
+                    price: 'Current Bid: $14,800',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 11,
+                    title: 'Tiffany Stained Glass',
+                    price: 'Current Bid: $28,500',
+                    path: '/api/placeholder/800/1000'
+                },
+                {
+                    id: 12,
+                    title: 'Signed First Edition',
+                    price: 'Current Bid: $7,200',
+                    path: '/api/placeholder/800/1000'
+                }
+            ];*/
+            
+            // Generate gallery thumbnails
+            const galleryGrid = document.getElementById('gallery-grid');
+            
+            galleryItems.forEach(item => {
+                const thumbnail = document.createElement('div');
+                thumbnail.className = 'thumbnail';
+                thumbnail.dataset.id = item.id;
+                
+                thumbnail.innerHTML = `
+                    <img data-src="${item.path}" alt="${item.title}">
+                    <div class="thumbnail-info">
+                        <h3>${item.title}</h3>
+                        <p>${item.price}</p>
+                    </div>
+                `;
+                
+                galleryGrid.appendChild(thumbnail);
+            });
+            
+            // Generate carousel slides
+            const slidesWrapper = document.getElementById('carousel-slides-wrapper');
+            const indicators = document.getElementById('carousel-indicators');
+            
+            galleryItems.forEach((item, index) => {
+                // Create slide
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.dataset.id = item.id;
+                slide.dataset.index = index;
+                
+                slide.innerHTML = `
+                    <img class="carousel-image" src="${item.path}" alt="${item.title}">
+                    <div class="carousel-caption">
+                        <h3>${item.title}</h3>
+                        <p>${item.price}</p>
+                    </div>
+                `;
+                
+                slidesWrapper.appendChild(slide);
+                
+                // Create indicator
+                const indicator = document.createElement('div');
+                indicator.className = 'indicator';
+                if (index === 0) indicator.classList.add('active');
+                indicator.dataset.index = index;
+                
+                indicators.appendChild(indicator);
+            });
+            
+            // Implement lazy loading for thumbnails
+            const lazyLoad = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target.querySelector('img');
+                        const src = img.dataset.src;
+                        
+                        img.onload = () => {
+                            img.classList.add('loaded');
+                            entry.target.classList.add('loaded');
+                        };
+                        
+                        img.src = src;
+                        observer.unobserve(entry.target);
+                    }
+                });
+            };
+            
+            const thumbnailObserver = new IntersectionObserver(lazyLoad, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+            
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumbnailObserver.observe(thumb);
+            });
+            
+            // Carousel functionality
+            const modal = document.getElementById('carousel-modal');
+            const closeBtn = document.getElementById('carousel-close');
+            const prevBtn = document.getElementById('carousel-prev');
+            const nextBtn = document.getElementById('carousel-next');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const totalSlides = slides.length;
+            
+            let currentSlide = 0;
+            
+            // Open carousel when clicking on a thumbnail
+            document.querySelectorAll('.thumbnail').forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    const id = parseInt(thumb.dataset.id);
+                    currentSlide = galleryItems.findIndex(item => item.id === id);
+                    updateCarousel();
+                    modal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Close carousel
+            closeBtn.addEventListener('click', () => {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Navigate carousel with buttons
+            prevBtn.addEventListener('click', () => {
+                goToPrevSlide();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                goToNextSlide();
+            });
+            
+            // Handle indicator clicks
+            document.querySelectorAll('.indicator').forEach(indicator => {
+                indicator.addEventListener('click', () => {
+                    currentSlide = parseInt(indicator.dataset.index);
+                    updateCarousel();
+                });
+            });
+            
+            // Handle keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (modal.style.display === 'flex') {
+                    if (e.key === 'ArrowLeft') {
+                        goToPrevSlide();
+                    } else if (e.key === 'ArrowRight') {
+                        goToNextSlide();
+                    } else if (e.key === 'Escape') {
+                        modal.style.display = 'none';
+                        document.body.style.overflow = 'auto';
+                    }
+                }
+            });
+            
+            // Touch swipe functionality
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            slidesWrapper.addEventListener('touchstart', (e) => {
+                touchStartX = e.changedTouches[0].screenX;
+            }, { passive: true });
+            
+            slidesWrapper.addEventListener('touchend', (e) => {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            }, { passive: true });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50; // Minimum swipe distance
+                
+                if (touchEndX < touchStartX - swipeThreshold) {
+                    // Swipe left - go to next slide
+                    goToNextSlide();
+                }
+                
+                if (touchEndX > touchStartX + swipeThreshold) {
+                    // Swipe right - go to previous slide
+                    goToPrevSlide();
+                }
+            }
+            
+            // Helper functions
+            function goToPrevSlide() {
+                currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                updateCarousel();
+            }
+            
+            function goToNextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                updateCarousel();
+            }
+            
+            // Update carousel display
+            function updateCarousel() {
+                // Update slides
+                slidesWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Update indicators
+                document.querySelectorAll('.indicator').forEach((indicator, index) => {
+                    if (index === currentSlide) {
+                        indicator.classList.add('active');
+                    } else {
+                        indicator.classList.remove('active');
+                    }
+                });
+            }
+            
+            // Close modal when clicking outside the carousel
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Check if device is mobile
+            function isMobile() {
+                return window.innerWidth <= 768;
+            }
+            
+            // Update navigation based on device
+            function updateNavigationForDevice() {
+                if (isMobile()) {
+                    prevBtn.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                    document.querySelector('.swipe-instruction').style.display = 'block';
+                } else {
+                    prevBtn.style.display = 'block';
+                    nextBtn.style.display = 'block';
+                    document.querySelector('.swipe-instruction').style.display = 'none';
+                }
+            }
+            
+            // Initialize and update on resize
+            updateNavigationForDevice();
+            window.addEventListener('resize', updateNavigationForDevice);
+        });
+    </script>
+</body>
+</html>
