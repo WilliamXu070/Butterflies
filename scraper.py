@@ -18,16 +18,17 @@ if response.status_code == 200:
     soup = BeautifulSoup(response.text, "html.parser")
     # Example: Find all auction items
     items = soup.find_all("a", class_="col-lg-3 col-md-4 col-6 item")  # Update with actual class
-    print(f"Found {len(items)} items", items)
+    print(f"Found {len(items)} items")
     for item in items:
-        #print(f"Item: {item}\n")
         title = None
         price = None
+        path = None
         link = None
         try:
             title = item.find("h5", class_="text-truncate-2 narrow").text.strip()  # Update class
             price = item.find("span", class_="currency-amount").text.strip()  # Update class
-            link = item.find("img", alt=title)["src"]  # Update class
+            path = item.find("img", alt=title)["src"]  # Update class
+            link = item["href"]
             print(f"Title: {title}\nPrice: {price}\nLink: {link}\n")
         except:
             price = "Attributes not found"
@@ -36,7 +37,8 @@ if response.status_code == 200:
             "id": len(data) + 1,
             "title": title,
             "price": price,
-            "path": link
+            "path": path,
+            "link": link
             #"path": "https://32auctions.com" + item["href"]  # Update with actual attribute
         })
 else:

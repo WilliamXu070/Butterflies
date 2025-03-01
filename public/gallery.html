@@ -119,10 +119,11 @@
                 slide.dataset.index = index;
                 
                 slide.innerHTML = `
-                    <img class="carousel-image" src="${item.path}" alt="${item.title}">
+                    <a target="_blank" href='https://32auctions.com${item.link}'><img class="carousel-image" src="${item.path}" alt="${item.title}"></a>
                     <div class="carousel-caption">
-                        <h3>${item.title}</h3>
+                        <h3 onclick="window.location.href=https://32auctions.com${item.link}" onmouseover="this.style.cursor='pointer'"">${item.title}</h3>
                         <p>${item.price}</p>
+                        <a target="_blank" href='https://32auctions.com${item.link}' style="color:white;">Bid</a>
                     </div>
                 `;
                 
